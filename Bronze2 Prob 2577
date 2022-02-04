@@ -1,0 +1,28 @@
+import java.util.*;
+
+public class Main {
+	public static void main(String[] args) {
+		int A, B, C;
+		int result;
+		String resulttostring;
+		
+		Scanner sc = new Scanner(System.in);
+		A = sc.nextInt();
+		B = sc.nextInt();
+		C = sc.nextInt();
+		sc.close();
+		
+		result = A * B * C;
+		resulttostring = Integer.toString(result);
+		
+		for(int i = 0; i < 10; i++) {
+			int count = 0;
+			for(int j = 0; j < resulttostring.length();j++) {
+				if((resulttostring.charAt(j) - '0')== i) {
+					count++;
+				}
+			}
+			System.out.println(count);
+		}
+	}
+}
