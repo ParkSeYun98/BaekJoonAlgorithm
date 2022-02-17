@@ -1,0 +1,31 @@
+package Java;
+
+import java.util.*;
+import java.io.*;
+
+public class Main {
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
+		while(true) {
+			String input = br.readLine();
+			
+			if(input == null)
+				break;
+			
+			String[] inputs = input.split(" ");
+			
+			int n = Integer.parseInt(inputs[0]);
+			int k = Integer.parseInt(inputs[1]);
+				
+			System.out.println(function(n, k, 0));
+		}
+	}
+	
+	public static int function(int coupon, int stamp, int order) {
+		if(coupon < stamp)
+			return order + coupon;
+		
+		return function((coupon / stamp) + (coupon % stamp), stamp, order + (coupon - coupon % stamp));
+	}
+}
