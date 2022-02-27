@@ -1,0 +1,40 @@
+package Java;
+
+import java.util.*;
+import java.io.*;
+
+public class Main {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int files;
+		
+		files = sc.nextInt();
+		
+		String[] filename = new String[files];
+		
+		for(int i=0; i<files; i++)
+			filename[i] = sc.next();
+		
+		StringBuilder Output = new StringBuilder();
+		
+		for(int i=0; i<filename[0].length(); i++) {
+			boolean Same = true;
+			char temp = filename[0].charAt(i);
+			
+			for(int j=1; j<files; j++) {
+				if(temp != filename[j].charAt(i)) { 
+					Same = false;
+					break;
+				}	
+			}
+			
+			if(Same == true)
+				Output.append(temp);
+			else
+				Output.append('?');
+		}
+		
+		System.out.println(Output.toString());
+		sc.close();
+	}
+}
