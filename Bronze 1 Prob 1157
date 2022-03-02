@@ -1,0 +1,34 @@
+import java.util.*;
+import java.io.*;
+
+public class Main {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int arr[] = new int[26];
+		String voca = sc.next();
+		sc.close();
+		
+		for(int i=0; i<voca.length(); i++) {
+			if((voca.charAt(i) >= 'A') && (voca.charAt(i) <= 'Z')) {
+				arr[voca.charAt(i) - 'A']++;
+			}
+			else {
+				arr[voca.charAt(i) - 'a']++;
+			}
+		}
+		
+		int max = 0;
+		char max_alphabet = '?';
+		
+		for(int i=0; i<26; i++) {
+			if(max < arr[i]) {
+				max = arr[i];
+				max_alphabet = (char)(i + 'A');
+			}
+			else if(max == arr[i])
+				max_alphabet = '?';
+		}
+		
+		System.out.println(max_alphabet);
+	}
+}
