@@ -1,0 +1,39 @@
+import java.util.*;
+import java.io.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+
+public class Main {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		int p;
+		int price;
+		String name;
+		int max = 0;
+		Map<Integer, String> map = new HashMap<Integer, String>();
+		
+		for(int i=0; i<n; i++) {
+			p = sc.nextInt();
+			
+			for(int j=0; j<p; j++) {
+				price = sc.nextInt();
+				name = sc.next();
+				map.put(price, name);
+			}
+			
+			for(Entry<Integer, String> entrySet : map.entrySet()) {
+				if(max < entrySet.getKey())
+					max = entrySet.getKey();
+			}
+			
+			for(Entry<Integer, String> entrySet : map.entrySet()) {
+				if(entrySet.getKey() == max)
+					System.out.println(entrySet.getValue());
+			}
+			max = 0;
+			map.clear();
+		}
+	}
+}
