@@ -1,0 +1,29 @@
+import java.io.*;
+
+public class Main {
+	public static Long arr[] = new Long[101];
+	
+	public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+        
+        arr[0] = 0L;
+        arr[1] = 1L;
+        arr[2] = 1L;
+        arr[3] = 1L;
+        
+        int N = Integer.parseInt(br.readLine());
+        
+        while(N-->0)
+        	sb.append(func(Integer.parseInt(br.readLine()))).append('\n');
+        
+        System.out.println(sb);
+    }
+	
+	public static long func(int k) {
+		if(arr[k] == null)
+			arr[k] = func(k-2) + func(k-3);
+			
+		return arr[k];
+	}
+}
