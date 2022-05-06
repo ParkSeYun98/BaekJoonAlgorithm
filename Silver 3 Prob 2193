@@ -1,0 +1,31 @@
+import java.io.*;
+
+public class Main {
+	public static long dp[];
+	
+	public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        
+        int N = Integer.parseInt(br.readLine());
+        dp = new long[N+1];
+
+        
+        System.out.println(Func(N));
+	}
+	
+	public static long Func(int N) {
+		if(N == 0)
+			return 0;
+		
+		else if(N == 1)
+			return 1;
+		
+		else if(dp[N] != 0)
+			return dp[N];
+		
+		else
+			dp[N] = Func(N-1) + Func(N-2);
+		
+		return dp[N];
+	}
+}
