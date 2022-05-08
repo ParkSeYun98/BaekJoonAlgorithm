@@ -1,0 +1,39 @@
+import java.util.*;
+import java.io.*;
+
+public class Main {
+	public static int arr[][];
+	public static int result;
+	public static int N;
+	
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		N = Integer.parseInt(br.readLine());
+		result = 0;
+		arr = new int[N][2];
+		
+		for(int i=0; i<N; i++) {
+			StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+			arr[i][0] = Integer.parseInt(st.nextToken());
+			arr[i][1] = Integer.parseInt(st.nextToken());
+		}
+		
+		DFS(0, 0);
+		
+		System.out.println(result);
+	}
+	
+	public static void DFS(int day, int pay) {
+		if(day >= N) {
+			result = Math.max(result, pay);
+			return;
+		}
+		
+		if(day + arr[day][0] <= N)
+			DFS(day + arr[day][0], pay + arr[day][1]);
+		else
+			DFS(day + arr[day][0], pay);
+		
+		DFS(day + 1, pay);
+	}
+}
