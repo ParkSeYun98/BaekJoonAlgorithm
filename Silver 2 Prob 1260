@@ -1,0 +1,63 @@
+import java.util.*;
+import java.io.*;
+
+public class Main {
+	static int N;
+	static int[][] DFSGraph = new int[1001][1001];
+	static int[][] BFSGraph = new int[1001][1001];
+	static boolean[] DFSVisit = new boolean[10001];
+	
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		
+		N = Integer.parseInt(st.nextToken());
+		
+		int M = Integer.parseInt(st.nextToken());
+		int V = Integer.parseInt(st.nextToken());
+		
+		for(int i=0; i<M; i++) {
+			st = new StringTokenizer(br.readLine());
+			
+			int u = Integer.parseInt(st.nextToken());
+			int v = Integer.parseInt(st.nextToken());
+			
+			// 간선은 양방향
+			DFSGraph[u][v] = DFSGraph[v][u] = 1; 
+			BFSGraph[u][v] = BFSGraph[v][u] = 1;
+		}
+		
+		DFS(V);
+		System.out.println();
+		BFS(V);
+	}	 
+	
+	public static void DFS(int node) {
+		DFSVisit[node] = true;
+		System.out.print(node + " ");
+		
+		for(int i=1; i<=N; i++) {
+			if(!DFSVisit[i] && DFSGraph[node][i] == 1)
+				DFS(i);
+		}
+	}
+	
+	public static void BFS(int node) {
+		boolean BFSVisit[] = new boolean[10001];
+		Queue<Integer> queue = new LinkedList<Integer>();
+		BFSVisit[node] = true;
+		queue.offer(node);
+		
+		while(!queue.isEmpty()) {
+			int P = queue.poll();
+			System.out.print(P + " ");
+			
+			for(int i=1; i<=N; i++) {
+				if(!BFSVisit[i] && BFSGraph[P][i] == 1) {
+					BFSVisit[i] = true;
+					queue.offer(i);
+				}
+			}
+		}
+	}
+}
