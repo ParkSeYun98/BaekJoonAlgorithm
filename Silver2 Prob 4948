@@ -1,0 +1,47 @@
+import java.io.*;
+
+public class Main {
+	public static boolean[] prime = new boolean[246913]; // n의 조건이 최대 123456이므로, 배열은 2n+1인 246913으로 사이즈를 정함
+	public static int[] count_arr = new int[246913]; // 소수의 개수를 담는 배열 (소수의 개수를 일일히 구하기 보다 배열에 저장해놓고, 이미 구했던 수의 경우에 배열에서 바로 꺼내서 쓸 수 있도록 함.)
+	
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringBuilder sb = new StringBuilder();
+		
+		getPrime();
+		getCount();
+		
+		while(true) {
+			int n = Integer.parseInt(br.readLine());
+			
+			if(n == 0)
+				break;
+			
+			sb.append(count_arr[2*n] - count_arr[n]).append('\n');
+		}
+		
+		System.out.println(sb);
+	}
+	
+	public static void getPrime() { // 에라토스테네스의 체 방식 활용
+		prime[0] = prime[1] = true; // false : 소수
+		
+		for(int i=2; i<=Math.sqrt(prime.length); i++) {
+			if(prime[i])
+				continue;
+			for(int j=i*i; j<prime.length; j+=i)
+					prime[j] = true;
+		}
+	}
+	
+	public static void getCount() {
+		int count = 0;
+		
+		for(int i=2; i<prime.length; i++) {
+			if(!prime[i])
+				count++;
+			
+			count_arr[i] = count;
+		}
+	}
+}
